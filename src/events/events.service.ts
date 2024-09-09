@@ -13,7 +13,18 @@ export class EventsService {
 
   async create(createEventDto: CreateEventDto) {
     try{
-      return await this._prismaService.evento.create({ data: createEventDto });
+      //console.log("fecha: ", createEventDto.date);
+
+    const eventCrete = await this._prismaService.evento.create({ data: createEventDto });
+
+    if(!eventCrete)
+    {
+      throw new ConflictException('Error al crear el evento');
+    }
+
+    return eventCrete;
+
+    
     }catch(error)
     {
       if(error instanceof Prisma.PrismaClientKnownRequestError)

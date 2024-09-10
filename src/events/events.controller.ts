@@ -12,7 +12,6 @@ export class EventsController {
   @Post()
   @ApiOperation({ summary: 'Crea evento' })
   create(@Body(new ValidationPipe) createEventDto: CreateEventDto) {
-    console.log(createEventDto);
     return this.eventsService.create(createEventDto);
   }
 

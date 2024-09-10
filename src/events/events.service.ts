@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { ConflictException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
@@ -13,8 +12,6 @@ export class EventsService {
 
   async create(createEventDto: CreateEventDto) {
     try{
-      //console.log("fecha: ", createEventDto.date);
-
     const eventCrete = await this._prismaService.evento.create({ data: createEventDto });
 
     if(!eventCrete)
@@ -24,7 +21,6 @@ export class EventsService {
 
     return eventCrete;
 
-    
     }catch(error)
     {
       if(error instanceof Prisma.PrismaClientKnownRequestError)
